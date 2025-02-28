@@ -2,11 +2,7 @@
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { Button } from "@/components/ui/button"
 import { FullNavbar } from "@/components/Navbar/Navbar"
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import { SparklesCore } from "@/components/ui/sparkles";
-import { TracingBeam } from "@/components/ui/tracing-beam";
 
 export default function BackgroundBeamsDemo() {
   const headline = [
@@ -27,8 +23,6 @@ export default function BackgroundBeamsDemo() {
       className: "text-blue-500 dark:text-blue-500",
     },
   ];
-
-  const words = "We specialize in building intelligent, scalable software solutions that leverage the power of artificial  intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth."
 
   return (
     
@@ -57,7 +51,7 @@ export default function BackgroundBeamsDemo() {
         
 <div className="max-w-5xl mx-auto">
 <p className="text-white italic  text-center text-2xl mt-[80px]">
-"We specialize in building intelligent, scalable software solutions that leverage the power of artificial  intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth."
+&quot; We specialize in building intelligent, scalable software solutions that leverage the power of artificial  intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth. &quot;
 
 
   </p>   
