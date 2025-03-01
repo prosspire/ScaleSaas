@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 export function FullNavbar() {
   return (
-    <div className="relative w-full  flex items-center justify-center">
+    <div className="relative w-full flex items-center justify-center">
       <Navbar className="top-2" />
     </div>
   );
@@ -15,11 +15,11 @@ function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   return (
     <div
-      className={cn("fixed top-10 inset-x-0 max-w-2xl mx-auto z-50", className)}
+      className={cn("fixed top-4 sm:top-6 md:top-8 lg:top-10 inset-x-0 w-[95%] sm:w-[90%] md:w-[85%] lg:max-w-2xl mx-auto z-50", className)}
     >
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Services">
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm">
             <HoveredLink href="/web-dev">Web Development</HoveredLink>
             <HoveredLink href="/interface-design">Interface Design</HoveredLink>
             <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
@@ -27,7 +27,7 @@ function Navbar({ className }: { className?: string }) {
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Products">
-          <div className="  text-sm grid grid-cols-2 gap-10 p-4">
+          <div className="text-xs sm:text-sm grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 p-2 sm:p-3 md:p-4">
             <ProductItem
               title="Algochurn"
               href="https://algochurn.com"
@@ -55,7 +55,7 @@ function Navbar({ className }: { className?: string }) {
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Pricing">
-          <div className="flex flex-col space-y-4 text-sm">
+          <div className="flex flex-col space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm">
             <HoveredLink href="/hobby">Hobby</HoveredLink>
             <HoveredLink href="/individual">Individual</HoveredLink>
             <HoveredLink href="/team">Team</HoveredLink>
