@@ -25,38 +25,35 @@ export default function BackgroundBeamsDemo() {
   ];
 
   return (
-    
-    <div className="h-[100vh] w-full  bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
-      {/* <TracingBeam className="px-2"> */}
-      <div className="mt-12">
-
-      <FullNavbar/>
+    <div className="min-h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased px-4">
+      <div className="mt-8 sm:mt-12">
+        <FullNavbar/>
       </div>
-      <div className="max-w-6xl justify-center items-center mx-auto p-4">
-      <div className=" w-full  flex flex-col items-center justify-center overflow-hidden rounded-md">
-      <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
-        Scale Saas
-      </h1>
-      <div className="w-[40rem] h-10 relative">
-        {/* Gradients */}
-        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
-        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
-        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
-        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
+      
+      <div className="max-w-6xl w-full mx-auto">
+        <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
+          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-center text-white relative z-20">
+            Scale Saas
+          </h1>
+          
+          <div className="w-full max-w-[40rem] h-10 relative">
+            {/* Gradients */}
+            <div className="absolute inset-x-[10%] sm:inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-[80%] sm:w-3/4 blur-sm" />
+            <div className="absolute inset-x-[10%] sm:inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-[80%] sm:w-3/4" />
+            <div className="absolute inset-x-[30%] sm:inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-[40%] sm:w-1/4 blur-sm" />
+            <div className="absolute inset-x-[30%] sm:inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-[40%] sm:w-1/4" />
+          </div>
+        </div>
 
-      </div>
-    </div>
-
-      <TypewriterEffectSmooth className="justify-center" words={headline} />
+        <TypewriterEffectSmooth className="justify-center" words={headline} />
         
-<div className="max-w-5xl mx-auto">
-<p className="text-white italic  text-center text-2xl mt-[80px]">
-&quot; We specialize in building intelligent, scalable software solutions that leverage the power of artificial  intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth. &quot;
+        <div className="max-w-5xl mx-auto px-4">
+          <p className="text-white italic text-center text-ss sm:text-lg  md:text-2xl mt-12 sm:mt-[80px]">
+            &quot; We specialize in building intelligent, scalable software solutions that leverage the power of artificial intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth. &quot;
+          </p>   
+        </div>   
 
-
-  </p>   
-  </div>   
-        <div className="flex flex-col sm:flex-row gap-3 mt-6 relative z-10">
+        <div className="flex flex-col sm:flex-row gap-3 mt-6 relative z-10 px-4">
           <input
             type="email"
             placeholder="your-email@company.com"
@@ -66,14 +63,13 @@ export default function BackgroundBeamsDemo() {
             Request Consultation
           </Button>
         </div>
+
         <div className="mt-6 text-center text-neutral-500 text-sm relative z-10">
           Trusted by innovative companies to build their AI-powered solutions
         </div>
       </div>
+      
       <BackgroundBeams />
-    {/* </TracingBeam> */}
     </div>
-
   )
 }
-
