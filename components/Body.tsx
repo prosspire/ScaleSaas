@@ -8,7 +8,7 @@ function Body() {
          <ContainerScroll
         titleComponent={
           <>
-            <h1 className="text-4xl font-semibold pb-[20px] text-black dark:text-white">
+            <h1 className="text-4xl font-semibold pb-[20px] ">
               Unleash the power of Ai in your software <br />
            
             </h1>

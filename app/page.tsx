@@ -7,7 +7,7 @@ export default function page() {
  
 
   return (
-    <div className=" dark:bg-neutral-950" >
+    <div className="" >
               <FullNavbar/>
 
       <div  className="">
@@ -19,7 +19,7 @@ export default function page() {
       <MainSection/>
       </div>
 
-<div className="h-[110vh] w-full bg-neutral-950">
+<div className="h-[110vh] w-full ">
 <Body/>
 </div>
 

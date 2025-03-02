@@ -20,10 +20,10 @@ function Navbar({ className }: { className?: string }) {
       <Menu setActive={setActive}>
         <MenuItem setActive={setActive} active={active} item="Services">
           <div className="flex flex-col space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm">
-            <HoveredLink href="/web-dev">Web Development</HoveredLink>
-            <HoveredLink href="/interface-design">Interface Design</HoveredLink>
-            <HoveredLink href="/seo">Search Engine Optimization</HoveredLink>
-            <HoveredLink href="/branding">Branding</HoveredLink>
+            <HoveredLink href="/services">Web Development</HoveredLink>
+            <HoveredLink href="/services">Interface Design</HoveredLink>
+            <HoveredLink href="/services">Search Engine Optimization</HoveredLink>
+            <HoveredLink href="/services">Branding</HoveredLink>
           </div>
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Products">
@@ -56,10 +56,10 @@ function Navbar({ className }: { className?: string }) {
         </MenuItem>
         <MenuItem setActive={setActive} active={active} item="Pricing">
           <div className="flex flex-col space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm">
-            <HoveredLink href="/hobby">Hobby</HoveredLink>
-            <HoveredLink href="/individual">Individual</HoveredLink>
-            <HoveredLink href="/team">Team</HoveredLink>
-            <HoveredLink href="/enterprise">Enterprise</HoveredLink>
+            <HoveredLink href="/pricing">Hobby</HoveredLink>
+            <HoveredLink href="/pricing">Individual</HoveredLink>
+            <HoveredLink href="/pricing">Team</HoveredLink>
+            <HoveredLink href="/pricing">Enterprise</HoveredLink>
           </div>
         </MenuItem>
       </Menu>

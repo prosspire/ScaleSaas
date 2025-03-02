@@ -26,7 +26,7 @@ export default function Hero() {
   ];
 
   return (
-    <div className="min-h-screen w-full dark:bg-neutral-950 bg-white relative flex flex-col items-center justify-center antialiased px-4">
+    <div className="min-h-screen w-full  relative flex flex-col items-center justify-center antialiased px-4">
 
       <div className="fixed md:block  hidden right-0 top-1/4 -translate-y-1/2 z-30">
         <FloatingReviewCards className="scale-[0.8]" />
@@ -34,7 +34,7 @@ export default function Hero() {
       
       <div className="max-w-6xl pt-[100px] md:pt-[200px] w-full mx-auto">
         <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-center text-white relative z-20">
+          <h1 className="text-6xl sm:text-7xl  md:text-8xl lg:text-9xl font-bold text-center  relative z-20">
             Scale Saas
           </h1>
           
@@ -60,7 +60,7 @@ export default function Hero() {
           <input
             type="email"
             placeholder="your-email@company.com"
-            className="rounded-lg border text-white md:w-[700px] w-[300px] border-neutral-800 focus:ring-2 focus:ring-teal-500  bg-neutral-950 placeholder:text-neutral-700 px-4 py-2"
+            className="rounded-lg border  md:w-[700px] w-[300px]  focus:ring-2 focus:ring-teal-500   placeholder:text-neutral-700 px-4 py-2"
           />
 
 <div className="md:mt-0 flex  mt-4 text-center justify-center items-center">
@@ -68,9 +68,9 @@ export default function Hero() {
 <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="dark:bg-black py-3  bg-white text-white dark:text-white   justify-center items-center space-x-2"
+        className="      justify-center items-center space-x-2"
       >
-<span className="md:text-xl    text-sm">Get Consultation</span>
+<span className="md:text-lg    text-sm">Get Consultation</span>
 
 
       </HoverBorderGradient>
