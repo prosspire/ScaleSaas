@@ -34,7 +34,7 @@ export default function Hero() {
       
       <div className="max-w-6xl pt-[100px] md:pt-[200px] w-full mx-auto">
         <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-          <h1 className="text-6xl sm:text-7xl  md:text-8xl lg:text-9xl font-bold text-center  relative z-20">
+          <h1 className="text-6xl sm:text-7xl dark:text-white  md:text-8xl lg:text-9xl font-bold text-center  relative z-20">
             Scale Saas
           </h1>
           

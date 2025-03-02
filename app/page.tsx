@@ -7,7 +7,7 @@ export default function page() {
  
 
   return (
-    <div className="" >
+    <div className=" dark:bg-neutral-950" >
               <FullNavbar/>
 
       <div  className="">

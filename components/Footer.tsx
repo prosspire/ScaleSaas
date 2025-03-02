@@ -3,7 +3,7 @@ import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-w
 
 export default function Footer() {
   return (
-    <BackgroundBeamsWithCollision className="w-full px-4 py-8 sm:px-6 lg:px-8">
+    <BackgroundBeamsWithCollision className="w-full dark:text-white px-4 py-8 sm:px-6 lg:px-8">
       <div className="w-full px-6 justify-center items-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
