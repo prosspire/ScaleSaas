@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let interval: any;
 
 type Card = {

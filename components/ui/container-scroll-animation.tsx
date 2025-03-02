@@ -30,13 +30,13 @@ export const ContainerScroll = ({
     return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 0.4], [25, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 0.3], [25, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], scaleDimensions());
   const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
-      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
+      className="h-[60rem] bg-neutral-950 md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
       ref={containerRef}
     >
       <div
@@ -53,7 +53,7 @@ export const ContainerScroll = ({
     </div>
   );
 };
-
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Header = ({ translate, titleComponent }: any) => {
   return (
     <motion.div

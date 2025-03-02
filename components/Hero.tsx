@@ -32,7 +32,7 @@ export default function Hero() {
         <FloatingReviewCards className="scale-[0.8]" />
       </div>
       
-      <div className="max-w-6xl w-full mx-auto">
+      <div className="max-w-6xl md:pt-[200px] w-full mx-auto">
         <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
           <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-center text-white relative z-20">
             Scale Saas

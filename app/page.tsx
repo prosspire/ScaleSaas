@@ -1,22 +1,31 @@
 import Hero from "@/components/Hero";
 import Body from "@/components/Body";
 import { FullNavbar } from "@/components/Navbar/Navbar"
-
-
-
+import Footer from "@/components/Footer";
+import { MainSection } from "@/components/MainSection";
 export default function page() {
  
 
   return (
-    <div className="min-h-screen w-full bg-neutral-950  flex flex-col items-center justify-center antialiased px-4">
+    <div className=" bg-neutral-950" >
               <FullNavbar/>
 
-      <div  className=" md:mt-[200px]">
+      <div  className="">
       <Hero/>
       </div>
 
-<div className="h-[50vh] w-full bg-neutral-950">
+
+      <div className="px-2 mt-[30px]">
+      <MainSection/>
+      </div>
+
+<div className="h-[110vh] w-full bg-neutral-950">
 <Body/>
+</div>
+
+
+<div className="">
+  <Footer/>
 </div>
     </div>
   )
