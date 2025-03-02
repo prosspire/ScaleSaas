@@ -32,7 +32,7 @@ export default function Hero() {
         <FloatingReviewCards className="scale-[0.8]" />
       </div>
       
-      <div className="max-w-6xl md:pt-[200px] w-full mx-auto">
+      <div className="max-w-6xl pt-[100px] md:pt-[200px] w-full mx-auto">
         <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
           <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-center text-white relative z-20">
             Scale Saas
@@ -55,23 +55,29 @@ export default function Hero() {
           </p>   
         </div>   
 
-        <div className="flex flex-col   mt-[100px] justify-center sm:flex-row gap-3  relative z-10 px-4">
+   <div className="justify-center items-center flex">
+   <div className="sm:flex  mt-[100px] justify-center items-center  gap-3  relative z-10 px-4">
           <input
             type="email"
             placeholder="your-email@company.com"
-            className="rounded-lg border md:w-[700px] w-[300px] border-neutral-800 focus:ring-2 focus:ring-teal-500  bg-neutral-950 placeholder:text-neutral-700 px-4 py-2"
+            className="rounded-lg border text-white md:w-[700px] w-[300px] border-neutral-800 focus:ring-2 focus:ring-teal-500  bg-neutral-950 placeholder:text-neutral-700 px-4 py-2"
           />
-             <HoverBorderGradient
+
+<div className="md:mt-0 flex  mt-4 text-center justify-center items-center">
+  
+<HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2"
+        className="dark:bg-black py-3  bg-white text-white dark:text-white   justify-center items-center space-x-2"
       >
-<span>Scale Saas</span>
+<span className="md:text-xl    text-sm">Get Consultation</span>
 
 
       </HoverBorderGradient>
+</div>
      
-        </div>
+        </div> 
+   </div>
 
         <div className="mt-6 text-center text-neutral-500 text-sm relative z-10">
           Trusted by innovative companies to build their AI-powered solutions
