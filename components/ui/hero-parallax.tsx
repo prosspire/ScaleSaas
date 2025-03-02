@@ -108,7 +108,7 @@ export const Header = () => {
       <h1 className="text-2xl md:text-7xl dark:text-white font-bold ">
         The Ultimate  <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent md:text-8xl  text-3xl font-bold"> AI Software</span> <br /> development studio
       </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 ">
+      <p className="max-w-2xl dark:text-white md:text-xl mt-8 ">
         We build beautiful products with the latest technologies and frameworks.
         We are a team of passionate developers and designers that love to build
         amazing products.
