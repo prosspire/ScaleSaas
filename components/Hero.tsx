@@ -28,7 +28,7 @@ export default function Hero() {
   return (
     <div className="min-h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased px-4">
 
-      <div className="fixed right-0 top-1/4 -translate-y-1/2 z-30">
+      <div className="fixed md:block  hidden right-0 top-1/4 -translate-y-1/2 z-30">
         <FloatingReviewCards className="scale-[0.8]" />
       </div>
       
