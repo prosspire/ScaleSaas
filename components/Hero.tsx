@@ -50,7 +50,7 @@ export default function Hero() {
         <TypewriterEffectSmooth className="justify-center" words={headline} />
         
         <div className="max-w-5xl mx-auto px-4">
-          <p className=" italic text-center text-ss sm:text-lg  md:text-2xl mt-12 sm:mt-[80px]">
+          <p className="dark:text-white italic text-center text-ss sm:text-lg  md:text-2xl mt-12 sm:mt-[80px]">
             &quot; We specialize in building intelligent, scalable software solutions that leverage the power of artificial intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth. &quot;
           </p>   
         </div>   
