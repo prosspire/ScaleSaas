@@ -44,6 +44,11 @@ export default function ServicesPage() {
       title: "Business Branding",
       description: "Comprehensive branding solutions including graphics and visual identity.",
       icon: "✨"
+    },
+    {
+      title: "Business marketing",
+      description: "Comprehensive marketing solutions including graphics and visual identity.",
+      icon: "📈"
     }
   ];
 
@@ -52,7 +57,7 @@ export default function ServicesPage() {
       <main className="dark:bg-neutral-950 min-h-screen relative justify-center items-center md:pt-[80px] pt-[30px]">
         <FullNavbar/>
         
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="md:mx-[130px] mx-[15px] px-4 py-20">
           <div className="text-center mb-20">
             <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 mb-6">
               Our Services
@@ -62,15 +67,15 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="relative group">
+              <div key={index} className="relative group ">
 
 
              
-                <HoverBorderGradient className=" rounded-none">
+                <HoverBorderGradient containerClassName="rounded-lg" className="  rounded-lg">
                 
-                  <div className="space-y-6">
+                  <div className="space-y-8 space-x-6   py-8  rounded-lg">
                     <span className="text-4xl relative z-20">{service.icon}</span>
                     <h3 className="text-xl font-semibold text-white relative z-20">
                       {service.title}
@@ -87,7 +92,6 @@ export default function ServicesPage() {
 
           <div className="mt-20 text-center flex justify-center items-center">
             <HoverBorderGradient
-              as="button"
               containerClassName="flex rounded-full"
               className="px-8 py-3"
             >

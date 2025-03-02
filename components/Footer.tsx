@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <BackgroundBeamsWithCollision className="w-full justify-center  items-center dark:text-white px-4 py-8 sm:px-6 lg:px-8">
       <div className="w-full  px-6 ">
-        <div className="  grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:mx-[40px] md:ml-[160px] ml-[70px]">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:mx-[40px] md:ml-[160px] ml-[10px]">
           <div className=" justify-center  items-center">
             <div className="justify-start flex items-center">
               <h3 className="text-lg sm:text-xl font-bold text-white">Company</h3>
