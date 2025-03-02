@@ -19,7 +19,7 @@ export default function page() {
       <MainSection/>
       </div>
 
-<div className="h-[110vh] w-full ">
+<div className="h-[100vh] w-full ">
 <Body/>
 </div>
 

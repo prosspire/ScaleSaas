@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function FullNavbar() {
   return (
@@ -18,6 +19,10 @@ function Navbar({ className }: { className?: string }) {
       className={cn("fixed top-4 sm:top-6 md:top-8 lg:top-10 inset-x-0 w-[95%] sm:w-[90%] md:w-[85%] lg:max-w-2xl mx-auto z-50", className)}
     >
       <Menu setActive={setActive}>
+        <Link href="/">
+      <MenuItem setActive={setActive}  active={active} item="Home">
+        </MenuItem>
+        </Link>
         <MenuItem setActive={setActive} active={active} item="Services">
           <div className="flex flex-col space-y-2 sm:space-y-3 md:space-y-4 text-xs sm:text-sm">
             <HoveredLink href="/services">Web Development</HoveredLink>
