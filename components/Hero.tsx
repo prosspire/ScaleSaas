@@ -3,9 +3,51 @@ import { BackgroundBeams } from "@/components/ui/background-beams"
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { FloatingReviewCards } from "@/components/reviews/review";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+  import {   EmailFormschemaType } from "@/lib/schema";
+  import { IEmaildetail } from "@/lib/types";
+  import { useEffect  } from "react";
+    import { useForm } from "react-hook-form";
+    import {
+    Form,
+    FormControl,
+    FormItem,
+    FormField,
+  } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+export default function Hero( {
+    onHandleSubmit,
+    defaultEmail,
+  }: {
+    defaultEmail: IEmaildetail;
+    onHandleSubmit: (data: EmailFormschemaType) => void;
+  }) {  
+    // Regular expression for email validation
 
+    const form = useForm<EmailFormschemaType>({
+      mode: "all",
+      // resolver: zodResolver(EmailFormschema),
 
-export default function Hero() {
+      defaultValues: {
+        email: defaultEmail?.email || "",
+      },
+    });
+
+    const onSubmit = (data: EmailFormschemaType) => {
+        onHandleSubmit(data);
+   
+    };
+    useEffect(() => {
+      if (form.getValues().email) {
+        form.setValue("created_at", new Date().toISOString().slice(0, 16));
+      }
+    }, [form.getValues().email]);
+
+    // Run the intro fade-in and then animation sequence
+
+   
+    
+  
+
   const headline = [
     {
       text: "Build",
@@ -55,29 +97,54 @@ export default function Hero() {
           </p>   
         </div>   
 
-   <div className="justify-center items-center flex">
-   <div className="sm:flex  mt-[100px] justify-center items-center  gap-3  relative z-10 px-4">
-          <input
-            type="email"
-            placeholder="your-email@company.com"
-            className="rounded-lg border  md:w-[700px] w-[300px]  focus:ring-2 focus:ring-teal-500   placeholder:text-neutral-700 px-4 py-2"
-          />
+<div className="flex justify-center items-center  px-4">
+  <div className="w-full max-w-4xl sm:mt-20 md:mt-24 relative z-10">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <div className="pt-8 sm:pt-10 md:pt-14">
+          {/* Responsive container with better breakpoints */}
+          <div className="w-full max-w-[350px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[850px] mx-auto p-1 border border-[#7A7979] rounded-full flex items-center gap-2">
+            
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your email address"
+                      {...field}
+                      className="flex-1 min-w-0 bg-black placeholder-white text-white border-none mx-2 sm:mx-3 md:mx-4 py-2 sm:py-3 md:py-4 lg:py-5 text-xs sm:text-sm md:text-lg lg:text-xl font-gilroy focus:outline-none focus:ring-0"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-<div className="md:mt-0 flex  mt-4 text-center justify-center items-center">
-  
-<HoverBorderGradient
-        containerClassName="rounded-full"
-        as="button"
-        className="      justify-center items-center space-x-2"
-      >
-<span className="md:text-lg    text-sm">Get Consultation</span>
+            {/* Responsive button */}
+            <div className="flex-shrink-0 pr-1">
+              <HoverBorderGradient
+                containerClassName="rounded-full"
+                typeof="submit"
+                as="button"
+                className="flex justify-center items-center px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-3 md:py-4 lg:py-5 whitespace-nowrap"
+              >
+                <span className="text-xs sm:text-sm md:text-base lg:text-lg font-gilroy">
+                  Get Consultation
+                </span>
+              </HoverBorderGradient>
+            </div>
+          </div>
+        </div>
+      </form>
+    </Form>
 
-
-      </HoverBorderGradient>
+    {/* Additional content area - responsive */}
+    <div className="mt-4 md:mt-6 flex justify-center items-center text-center">
+      {/* Add any additional content here */}
+    </div>
+  </div>
 </div>
-     
-        </div> 
-   </div>
 
         <div className="mt-6 dark:text-white text-center text-neutral-500 text-sm relative z-10">
           Trusted by innovative companies to build their AI-powered solutions

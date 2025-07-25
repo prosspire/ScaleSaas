@@ -34,28 +34,28 @@ function Navbar({ className }: { className?: string }) {
         <MenuItem setActive={setActive} active={active} item="Products">
           <div className="text-xs sm:text-sm grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 p-2 sm:p-3 md:p-4">
             <ProductItem
-              title="Algochurn"
-              href="https://algochurn.com"
-              src="https://assets.aceternity.com/demos/algochurn.webp"
-              description="Prepare for tech interviews like never before."
+              title="Home finder"
+              href="https://www.homefinderr.com/"
+              src="https://owerrlaobwdowecvbfgk.supabase.co/storage/v1/object/public/images/uploads/IaOacO7OnWfhAAzfhv5Wn_singlelandingpage.png"
+              description="Home finder is a web application that helps you find the perfect home in Goa"
             />
             <ProductItem
-              title="Tailwind Master Kit"
-              href="https://tailwindmasterkit.com"
-              src="https://assets.aceternity.com/demos/tailwindmasterkit.webp"
-              description="Production ready Tailwind css components for your next project"
+              title="ashish rohilla"
+              href="https://www.ashishrohilla.in/"
+              src="https://owerrlaobwdowecvbfgk.supabase.co/storage/v1/object/public/images/uploads/9vbq5zmRVjTPSd3O6dCDh_ashishrohilla.in.png"
+              description="A single page for learning devops and System design. Free courses and resources for system design."
             />
             <ProductItem
-              title="Moonbeam"
-              href="https://gomoonbeam.com"
-              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.51.31%E2%80%AFPM.png"
-              description="Never write from scratch again. Go from idea to blog in minutes."
+              title="kaksha"
+              href="https://my-kaksha-by-ashish.vercel.app/"
+              src="https://owerrlaobwdowecvbfgk.supabase.co/storage/v1/object/public/images/uploads/Cdc4denhsK3no3t-CcCYI_kaksha.png"
+              description="Place to sell and monetize your skills and knowledge. Create your own courses and earn money."
             />
             <ProductItem
-              title="Rogue"
-              href="https://userogue.com"
-              src="https://assets.aceternity.com/demos/Screenshot+2024-02-21+at+11.47.07%E2%80%AFPM.png"
-              description="Respond to government RFPs, RFIs and RFQs 10x faster using AI"
+              title="peeky pages"
+              href="https://peakyypages.vercel.app/"
+              src="https://owerrlaobwdowecvbfgk.supabase.co/storage/v1/object/public/images/uploads/mYUzzlGtE7CaF9WqJPzi4_3dwebsite.png"
+              description="A collection of 3D websites and landing pages. Get inspired by the best 3D websites."
             />
           </div>
         </MenuItem>

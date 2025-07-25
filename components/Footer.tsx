@@ -21,8 +21,6 @@ export default function Footer() {
           </div>
 
 
-
-
           <div className=" justify-center  items-center">
             <div className="justify-start flex items-center">
               <h3 className="text-lg sm:text-xl font-bold text-white">Services</h3>

@@ -75,7 +75,7 @@ export default function ServicesPage() {
              
                 <HoverBorderGradient containerClassName="rounded-lg" className="  rounded-lg">
                 
-                  <div className="space-y-8 space-x-6   py-8  rounded-lg">
+                  <div className="space-y-8 spa   py-8  rounded-lg">
                     <span className="text-4xl relative z-20">{service.icon}</span>
                     <h3 className="text-xl font-semibold text-white relative z-20">
                       {service.title}
