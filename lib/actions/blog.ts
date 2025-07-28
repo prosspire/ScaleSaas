@@ -15,6 +15,9 @@ export async function createEmail(data: {
 
 }) {
 
+
+	// returning data 
+
 	const supabase = await createSupabaseServerClient();
 	const emailresult = await supabase
 		.from("emaildata")
