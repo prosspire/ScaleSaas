@@ -114,7 +114,7 @@ export default function Hero( {
                     <Input
                       placeholder="Enter your email address"
                       {...field}
-                      className="flex-1 min-w-0 bg-black placeholder-white text-white border-none mx-2 sm:mx-3 md:mx-4 py-2 sm:py-3 md:py-4 lg:py-5 text-xs sm:text-sm md:text-lg lg:text-xl font-gilroy focus:outline-none focus:ring-0"
+                      className="flex-1 min-w-0  placeholder-white text-white border-none mx-2 sm:mx-3 md:mx-4 py-2 sm:py-3 md:py-4 lg:py-5 text-xs sm:text-sm md:text-lg lg:text-xl font-gilroy focus:outline-none "
                     />
                   </FormControl>
                 </FormItem>

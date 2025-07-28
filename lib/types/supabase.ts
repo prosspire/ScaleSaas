@@ -101,7 +101,7 @@ export type Database = {
           }
         ]
       }
-      Emaildata: {
+      emaildata: {
         Row: {
           email: string
           created_at: string

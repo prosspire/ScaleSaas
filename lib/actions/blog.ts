@@ -16,12 +16,14 @@ export async function createEmail(data: {
 }) {
 
 	const supabase = await createSupabaseServerClient();
-	const blogResult = await supabase
-		.from("Emaildata")
+	const emailresult = await supabase
+		.from("emaildata")
 		.insert(data)
 		.single();
 
-    return blogResult;
+	console.log("Email result:", emailresult);
+
+    return emailresult;
 }
 
 

@@ -10,8 +10,7 @@ import { ToastAction } from "@/components/ui/toast"
 import { createEmail } from "@/lib/actions/blog";
 import { EmailFormschemaType} from "@/lib/schema";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import { toast } from "@/components/ui/use-toast";
-
+import { toast } from "sonner"
 export default function Page() {
 
   const router = useRouter();
@@ -22,11 +21,14 @@ export default function Page() {
 	const onHandleSubmit = async (data: EmailFormschemaType) => {
 		// Validate email format before sending data
 		if (!emailRegex.test(data.email)) {
-			toast( {
-				variant: "destructive",
-				title: "Uh oh! email validation failed  😢",
+			toast( "email verification failed", {
 				description: "Please enter a valid email address.",
-				action: <ToastAction altText="Try again">Try again</ToastAction>,
+				action: {
+					label: "Try Again",
+					onClick: () => {
+						router.push("/"); // Redirect to the homepage or any other page
+					},
+				}
 			
 			}
 		);
@@ -35,16 +37,18 @@ export default function Page() {
 
 		try {
 			const result = await createEmail(data);	
+
+			console.log("Email submission result:", result);
 			if (!result) {
 				throw new Error("No response received from server.");
 			}
 
 			const parsedResult = result as PostgrestSingleResponse<null>;
+			console.log(parsedResult);
 			const { error } = parsedResult;
 
 			if (error?.message) {
-				toast({
-					title: "Failed to add the email 😢",
+				toast("Error submitting email", {
 					description: (
 						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
 							<code className="text-white">{error.message}</code>
@@ -52,16 +56,14 @@ export default function Page() {
 					),
 				});
 			} else {
-				toast({
-					title: "Successfully added your email 🎉",
+				toast("successfully added the email 🎉", {
 					description: data.email,
 				});
-				router.push("/");
+				router.push("/thankyou");
 			}
 		} catch (error) {
 			console.error("Error occurred while handling submit:", error);
-			toast({
-				title: "Submission Error",
+			toast("Error submitting email", {
 				description: "An error occurred while submitting your email. Please try again.",
 			});
 		}
