@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import { MainSection } from "@/components/MainSection";
 import { useRouter } from "next/navigation";
 import { defaultEmail } from "@/lib/data";
-import { ToastAction } from "@/components/ui/toast"
 import { createEmail } from "@/lib/actions/blog";
 import { EmailFormschemaType} from "@/lib/schema";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
