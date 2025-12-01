@@ -2,7 +2,8 @@
 import Hero from "@/components/Hero";
 import Body from "@/components/Body";
 
-import { MainSection } from "@/components/MainSection";
+import MethodologySection from "@/components/MainSection";
+
 import { useRouter } from "next/navigation";
 import { defaultEmail } from "@/lib/data";
 import { createEmail } from "@/lib/actions/blog";
@@ -82,7 +83,7 @@ export default function Page() {
 
 
       <div className="px-2 mt-[30px]">
-      <MainSection/>
+      <MethodologySection/>
       </div>
 
 	  
