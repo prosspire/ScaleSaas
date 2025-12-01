@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { ThemeProvider } from "next-themes";
+import { FullNavbar } from "@/components/Navbar/Navbar"
+import Footer from "@/components/Footer";
 
 
 
@@ -20,16 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-      className="dark:bg-neutral-950"
+      className="bg-neutral-950"
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} // This prevents system theme detection
-      forcedTheme="dark"    // This forces dark theme always
-      >
+        <FullNavbar/>
         {children}
           <Analytics/>
               <SpeedInsights/>
+         <Footer/>
          <Toaster />
-        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,8 +1,10 @@
 "use client"
 import { BackgroundBeams } from "@/components/ui/background-beams"
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
-import { FloatingReviewCards } from "@/components/reviews/review";
+// import { FloatingReviewCards } from "@/components/reviews/review";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
+
   import {   EmailFormschemaType } from "@/lib/schema";
   import { IEmaildetail } from "@/lib/types";
   import { useEffect  } from "react";
@@ -63,20 +65,20 @@ export default function Hero( {
     },
     {
       text: "Scale Saas.",
-      className: "text-blue-500 dark:text-blue-500",
+      className: "text-blue-500 text-blue-500",
     },
   ];
 
   return (
-    <div className="min-h-screen w-full  relative flex flex-col items-center justify-center antialiased px-4">
+    <div id="#home" className="min-h-screen w-full  relative flex flex-col items-center justify-center antialiased px-4">
 
       <div className="fixed md:block  hidden right-0 top-1/4 -translate-y-1/2 z-30">
-        <FloatingReviewCards className="scale-[0.8]" />
+        {/* <FloatingReviewCards className="scale-[0.8]" /> */}
       </div>
       
       <div className="max-w-6xl pt-[100px] md:pt-[200px] w-full mx-auto">
         <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
-          <h1 className="text-6xl sm:text-7xl dark:text-white  md:text-8xl lg:text-9xl font-bold text-center  relative z-20">
+          <h1 className="text-6xl sm:text-7xl text-white  md:text-8xl lg:text-9xl font-bold text-center  relative z-20">
             Scale Saas
           </h1>
           
@@ -92,9 +94,31 @@ export default function Hero( {
         <TypewriterEffectSmooth className="justify-center" words={headline} />
         
         <div className="max-w-5xl mx-auto px-4">
-          <p className="dark:text-white italic text-center text-ss sm:text-lg  md:text-2xl mt-12 sm:mt-[80px]">
-            &quot; We specialize in building intelligent, scalable software solutions that leverage the power of artificial intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives business growth. &quot;
-          </p>   
+          <h2 className="text-white italic text-center text-ss sm:text-lg  md:text-2xl mt-12 sm:mt-[80px]">
+            &quot; We specialize in building intelligent, 
+
+             <PointerHighlight
+            rectangleClassName="bg-green-200 bg-teal-400 border-neutral-300 border-neutral-600 leading-loose"
+            pointerClassName="text-yellow-500 h-3 w-3"
+            containerClassName="inline-block mr-1"
+          >
+            <span className="relative px-2 z-10">scalable software </span>
+          </PointerHighlight>
+            
+            
+            
+            solutions that leverage the power of artificial intelligence. From custom AI integrations to full-scale SaaS platforms, our team delivers cutting-edge technology that drives
+            
+            
+             <PointerHighlight
+            rectangleClassName="bg-green-200 bg-yellow-400 border-neutral-300 border-neutral-600 leading-loose"
+            pointerClassName="text-yellow-500 h-3 w-3"
+            containerClassName="inline-block mr-1"
+          >
+            <span className="relative px-2 z-10">business growth</span>
+          </PointerHighlight>
+             &quot;
+          </h2>   
         </div>   
 
 <div className="flex justify-center items-center  px-4">
@@ -146,7 +170,7 @@ export default function Hero( {
   </div>
 </div>
 
-        <div className="mt-6 dark:text-white text-center text-neutral-500 text-sm relative z-10">
+        <div className="mt-6 text-white text-center  text-sm relative z-10">
           Trusted by innovative companies to build their AI-powered solutions
         </div>
       </div>

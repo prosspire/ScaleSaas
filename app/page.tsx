@@ -1,8 +1,7 @@
 "use client";
 import Hero from "@/components/Hero";
 import Body from "@/components/Body";
-import { FullNavbar } from "@/components/Navbar/Navbar"
-import Footer from "@/components/Footer";
+
 import { MainSection } from "@/components/MainSection";
 import { useRouter } from "next/navigation";
 import { defaultEmail } from "@/lib/data";
@@ -10,6 +9,9 @@ import { createEmail } from "@/lib/actions/blog";
 import { EmailFormschemaType} from "@/lib/schema";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { toast } from "sonner"
+import RecentWork from "@/components/ui/Websites/recenwork";
+import ServicesPage from "@/components/service";
+import WrapUpSection from "@/components/Wrapupsection";
 export default function Page() {
 
   const router = useRouter();
@@ -70,26 +72,29 @@ export default function Page() {
  
 
   return (
-    <div className=" dark:bg-neutral-950" >
-              <FullNavbar/>
+    <div className="bg-neutral-950" >
 
       <div  className="">
       <Hero onHandleSubmit={onHandleSubmit} defaultEmail={defaultEmail} />
       </div>
+
+	  <RecentWork/>
 
 
       <div className="px-2 mt-[30px]">
       <MainSection/>
       </div>
 
-<div className=" w-full ">
+	  
+
 <Body/>
-</div>
+<ServicesPage/>
+<WrapUpSection/>
+
 
 
 <div className="">
-  <Footer/>
-</div>
+</div> 
     </div>
   )
 }
