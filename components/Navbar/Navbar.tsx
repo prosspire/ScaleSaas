@@ -29,7 +29,7 @@ function Navbar({ className }: { className?: string }) {
         Services
         </Link>
         <Link className="text-white" href ="/aboutus">
-      About Us
+      About
         </Link>
         <Link href="/products" className="text-white">
         Products
