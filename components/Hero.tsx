@@ -9,12 +9,11 @@ import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Titan_One, Nunito } from 'next/font/google';
+import { EmailFormschemaType } from "@/lib/schema";
+import { IEmaildetail } from "@/lib/types";
 
 // --- TYPES (Mocking these based on your snippet) ---
 // You can import these from your actual @/lib files
-type IEmaildetail = { email: string };
-type EmailFormschemaType = { email: string; created_at?: string };
-
 // --- FONTS ---
 const titleFont = Titan_One({ 
   weight: '400', 
