@@ -168,7 +168,7 @@ export default function EncoderDecoderPage() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setInput("") || setMode(tab.id as any)} // Clear input on switch
+onClick={() => { setInput(""); setMode(tab.id as any); }}
                   className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${
                     mode === tab.id 
                     ? `bg-${tab.color}-600 text-white shadow-lg` 
