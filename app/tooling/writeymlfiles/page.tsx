@@ -1,261 +1,256 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Script from "next/script";
-import { motion, AnimatePresence } from "framer-motion";
+import yaml from "js-yaml"; 
+import * as Diff from "diff"; // Import the diff library
 import { 
-  Clock, 
-  Copy, 
-  RefreshCw, 
-  Check, 
-  CalendarClock, 
-  Terminal,
-  Info,
-  ChevronDown
+  FileCode, Activity, Layers, ArrowRightLeft, 
+  CheckCircle, AlertTriangle, Box, Server, Globe,
+  GitCompare, ArrowRight, X, Plus, Minus
 } from "lucide-react";
-import { Titan_One, Nunito, Fira_Code } from 'next/font/google';
+import { Nunito, Fira_Code } from 'next/font/google';
 
 // --- FONTS ---
-const titleFont = Titan_One({ weight: '400', subsets: ['latin'] });
 const bodyFont = Nunito({ subsets: ['latin'], weight: ['400', '600', '700'] });
 const codeFont = Fira_Code({ subsets: ['latin'], weight: ['400', '500'] });
 
-// --- UTILS: CRON DESCRIPTION ---
-const describeCron = (cron: any) => {
-  const { minute, hour, dom, month, dow } = cron;
-  if (minute === '*' && hour === '*' && dom === '*' && month === '*' && dow === '*') return "Every minute";
-  if (minute === '0' && hour === '0' && dom === '*' && month === '*' && dow === '*') return "Every day at midnight";
-  if (minute === '0' && hour === '0' && dom === '*' && month === '*' && dow === '0') return "Every Sunday at midnight";
-  
-  let desc = "At ";
-  
-  // Time
-  if (minute === '*' && hour === '*') desc += "every minute";
-  else if (minute !== '*' && hour === '*') desc += `minute ${minute} of every hour`;
-  else if (minute === '0' && hour !== '*') desc += `hour ${hour}:00`;
-  else desc += `${hour}:${minute.padStart(2, '0')}`;
+// --- REUSABLE EDITOR ---
+const SimpleEditor = ({ code, setCode, label, color = "indigo" }: any) => (
+  <div className="flex flex-col h-full bg-neutral-900 rounded-xl border border-white/10 overflow-hidden shadow-lg">
+    <div className="bg-[#0f0f0f] border-b border-white/5 p-2 flex justify-between items-center">
+      <div className={`text-xs font-bold text-${color}-400 uppercase tracking-widest px-2`}>
+        {label}
+      </div>
+    </div>
+    <textarea 
+      value={code}
+      onChange={(e) => setCode(e.target.value)}
+      className={`flex-1 w-full h-full bg-transparent p-4 resize-none focus:outline-none ${codeFont.className} text-xs md:text-sm leading-6 text-slate-300 selection:bg-${color}-500/30`}
+      spellCheck={false}
+    />
+  </div>
+);
 
-  // Date
-  if (dom !== '*') desc += ` on day-of-month ${dom}`;
-  if (month !== '*') desc += ` in month ${month}`;
-  if (dow !== '*') desc += ` on day-of-week ${dow}`;
-  
-  return desc;
-};
+// --- COMPONENT: DIFF VIEWER ---
+const DiffViewer = ({ oldText, newText }: { oldText: string, newText: string }) => {
+  const [diffs, setDiffs] = useState<Diff.Change[]>([]);
 
-// --- PRESETS ---
-const presets = [
-  { label: "Every Minute", value: { minute: "*", hour: "*", dom: "*", month: "*", dow: "*" } },
-  { label: "Hourly", value: { minute: "0", hour: "*", dom: "*", month: "*", dow: "*" } },
-  { label: "Daily (Midnight)", value: { minute: "0", hour: "0", dom: "*", month: "*", dow: "*" } },
-  { label: "Weekly (Sun)", value: { minute: "0", hour: "0", dom: "*", month: "*", dow: "0" } },
-  { label: "Monthly (1st)", value: { minute: "0", hour: "0", dom: "1", month: "*", dow: "*" } },
-];
-
-// --- COMPONENT: FIELD SELECTOR ---
-const CronField = ({ label, value, onChange, options, range }: any) => {
-  const [mode, setMode] = useState(value === '*' ? 'every' : 'specific');
-
-  const handleModeChange = (newMode: string) => {
-    setMode(newMode);
-    if (newMode === 'every') onChange('*');
-    if (newMode === 'specific') onChange('0');
-  };
+  useEffect(() => {
+    if (oldText && newText) {
+      // Create line-by-line diff
+      const changes = Diff.diffLines(oldText, newText);
+      setDiffs(changes);
+    }
+  }, [oldText, newText]);
 
   return (
-    <div className="bg-neutral-900/50 border border-white/10 rounded-xl p-4 flex flex-col gap-3 group hover:border-indigo-500/30 transition-all">
-      <div className="flex justify-between items-center">
-        <span className="text-sm font-bold text-indigo-300 uppercase tracking-wider">{label}</span>
-        <select 
-          value={mode} 
-          onChange={(e) => handleModeChange(e.target.value)}
-          className="bg-black/30 border border-white/10 rounded-md text-xs px-2 py-1 text-slate-300 focus:outline-none focus:border-indigo-500"
-        >
-          <option value="every">Every</option>
-          <option value="specific">Specific</option>
-        </select>
-      </div>
+    <div className={`h-full overflow-auto bg-[#0a0a0a] p-4 ${codeFont.className} text-xs md:text-sm`}>
+      {diffs.map((part, index) => {
+        // Determine style based on change type
+        let bgClass = "bg-transparent";
+        let textClass = "text-slate-400";
+        let sign = " ";
 
-      {mode === 'every' ? (
-        <div className="h-10 flex items-center justify-center text-slate-500 text-sm italic">
-          * (Any {label})
-        </div>
-      ) : (
-        <div className="relative">
-           {/* Simple Range Input for Demo */}
-           <input 
-             type="range" 
-             min={range[0]} 
-             max={range[1]} 
-             value={parseInt(value) || 0} 
-             onChange={(e) => onChange(e.target.value)}
-             className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-           />
-           <div className="mt-2 text-center font-mono text-white font-bold text-lg">
-             {value}
-           </div>
-        </div>
-      )}
+        if (part.added) {
+          bgClass = "bg-emerald-500/10 border-l-2 border-emerald-500";
+          textClass = "text-emerald-400";
+          sign = "+";
+        } else if (part.removed) {
+          bgClass = "bg-rose-500/10 border-l-2 border-rose-500";
+          textClass = "text-rose-400 line-through opacity-70";
+          sign = "-";
+        }
+
+        return (
+          <div key={index} className={`${bgClass} px-2 py-0.5 whitespace-pre-wrap flex`}>
+             <span className={`w-6 select-none opacity-50 font-bold ${textClass}`}>{sign}</span>
+             <span className={textClass}>{part.value.replace(/\n$/, '')}</span> 
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-export default function CronGeneratorPage() {
-  const [cron, setCron] = useState({ minute: "*", hour: "*", dom: "*", month: "*", dow: "*" });
-  const [copied, setCopied] = useState(false);
-
-  const cronString = `${cron.minute} ${cron.hour} ${cron.dom} ${cron.month} ${cron.dow}`;
-  const humanDesc = describeCron(cron);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(cronString);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  // SEO Schema
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Scale Saas Cron Generator",
-    "description": "Free visual cron job schedule generator. Convert clicks to cron syntax instantly.",
-    "applicationCategory": "DeveloperApplication",
-    "featureList": "Cron Syntax Generator, Human Readable Cron, Cron Presets"
-  };
+// --- COMPONENT: DOCKER VISUALIZER ---
+const DockerVisualizer = ({ data }: { data: any }) => {
+  if (!data || !data.services) return (
+    <div className="h-full flex flex-col items-center justify-center text-slate-500">
+      <Box className="w-12 h-12 mb-4 opacity-20" />
+      <p>Paste a Docker Compose file to visualize</p>
+    </div>
+  );
 
   return (
-    <div className={`w-full min-h-screen bg-neutral-950 text-white ${bodyFont.className}`}>
+    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-auto h-full">
+      {Object.entries(data.services).map(([name, service]: [string, any]) => (
+        <div key={name} className="bg-white/5 border border-white/10 rounded-xl p-4 hover:border-indigo-500/50 transition-all group relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-100 transition-opacity">
+            <Server className="w-12 h-12 text-indigo-500" />
+          </div>
+          <div className="flex items-center justify-between mb-3 relative z-10">
+            <h3 className="font-bold text-white text-lg">{name}</h3>
+            <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded border border-indigo-500/30">
+              {service.image || "build"}
+            </span>
+          </div>
+          
+          <div className="space-y-2 text-sm font-mono text-slate-400 relative z-10">
+            {service.ports && (
+              <div className="flex items-center gap-2">
+                <Globe className="w-3 h-3 text-emerald-400" />
+                <span className="text-slate-300">
+                   {service.ports.map((p: any) => typeof p === 'string' ? p : `${p.published}:${p.target}`).join(", ")}
+                </span>
+              </div>
+            )}
+            {service.volumes && (
+              <div className="flex items-center gap-2">
+                <Layers className="w-3 h-3 text-pink-400" />
+                <span className="text-slate-500 text-xs">{service.volumes.length} Volumes</span>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default function DevOpsYamlTool() {
+  // Input State
+  const [yamlLeft, setYamlLeft] = useState(
+`version: '3'
+services:
+  web:
+    image: nginx:1.19
+    ports:
+      - "80:80"`
+  );
+  
+  // Only used for Comparison Mode
+  const [yamlRight, setYamlRight] = useState(
+`version: '3'
+services:
+  web:
+    image: nginx:latest # Changed tag
+    ports:
+      - "80:80"
+      - "443:443" # Added SSL`
+  );
+
+  const [activeTab, setActiveTab] = useState<'validate' | 'convert' | 'visualize' | 'compare'>('compare');
+  const [parsedObj, setParsedObj] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // --- LOGIC ENGINE ---
+  useEffect(() => {
+    try {
+      const obj = yaml.load(yamlLeft);
+      setParsedObj(obj);
+      setError(null);
+    } catch (e: any) {
+      setError(e.message);
+      setParsedObj(null);
+    }
+  }, [yamlLeft]);
+
+  return (
+    <div className={`min-h-screen bg-neutral-950 text-white ${bodyFont.className} p-4`}>
       
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
-
-      {/* --- HEADER --- */}
-      <header className="pt-24 pb-12 px-6 relative z-10 text-center">
-         <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-sm font-bold uppercase tracking-widest mb-6">
-            <Clock className="w-4 h-4" /> Scheduler Tool
-         </div>
-         <h1 className={`text-4xl md:text-5xl font-black mb-4 ${titleFont.className}`}>
-            Visual <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-rose-400">Cron Builder</span>
-         </h1>
+      {/* Header */}
+      <header className="max-w-[95rem] mx-auto mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-black flex items-center gap-3">
+             <Layers className="text-indigo-500 w-8 h-8" />
+             DevOps <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">YAML Studio</span>
+          </h1>
+          <p className="text-slate-500 mt-1">Infrastructure Config Manager</p>
+        </div>
+        
+        {/* Tool Selector */}
+        <div className="flex flex-wrap bg-neutral-900 p-1 rounded-xl border border-white/10 gap-1">
+           {[
+             { id: 'visualize', icon: Box, label: 'Viz' },
+             { id: 'convert', icon: ArrowRightLeft, label: 'JSON' },
+             { id: 'validate', icon: CheckCircle, label: 'Lint' },
+             { id: 'compare', icon: GitCompare, label: 'Diff' },
+           ].map((tab) => (
+             <button
+               key={tab.id}
+               onClick={() => setActiveTab(tab.id as any)}
+               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${
+                 activeTab === tab.id 
+                 ? 'bg-indigo-600 text-white shadow-lg' 
+                 : 'text-slate-400 hover:text-white hover:bg-white/5'
+               }`}
+             >
+               <tab.icon className="w-4 h-4" />
+               <span className="hidden sm:inline">{tab.label}</span>
+             </button>
+           ))}
+        </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-6 pb-20 relative z-10">
-         
-         {/* --- MAIN DISPLAY --- */}
-         <motion.div 
-           initial={{ opacity: 0, scale: 0.95 }}
-           animate={{ opacity: 1, scale: 1 }}
-           className="bg-neutral-900/80 backdrop-blur-xl border border-white/10 rounded-[2rem] p-8 md:p-12 shadow-2xl relative overflow-hidden mb-8 text-center"
-         >
-            {/* Glow Behind Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/20 rounded-full blur-[80px]"></div>
+      {/* Main Workspace */}
+      <main className="max-w-[95rem] mx-auto h-[700px]">
+        
+        {/* MODE: SINGLE INPUT (Viz, JSON, Lint) */}
+        {activeTab !== 'compare' && (
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+              <div className="flex flex-col gap-2">
+                 <SimpleEditor code={yamlLeft} setCode={setYamlLeft} label="YAML Input" color="indigo" />
+                 {error && (
+                   <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg text-xs font-mono flex items-center gap-2">
+                     <AlertTriangle className="w-4 h-4" /> {error.split('\n')[0]}
+                   </div>
+                 )}
+              </div>
 
-            <div className="relative z-10">
-               <p className="text-slate-400 font-medium mb-2 uppercase tracking-widest text-xs">Generated Expression</p>
-               <div className="flex items-center justify-center gap-4 mb-6">
-                  <span className={`${codeFont.className} text-4xl md:text-6xl text-white font-bold tracking-wider`}>
-                     {cronString}
-                  </span>
-                  <button 
-                    onClick={handleCopy}
-                    className="p-3 bg-white/10 hover:bg-white/20 rounded-xl transition-colors text-white"
-                  >
-                     {copied ? <Check className="w-6 h-6 text-green-400" /> : <Copy className="w-6 h-6" />}
-                  </button>
-               </div>
+              <div className="flex flex-col h-full bg-neutral-900 rounded-xl border border-white/10 overflow-hidden relative shadow-lg">
+                 <div className="bg-[#0f0f0f] border-b border-white/5 p-2 flex justify-between items-center">
+                   <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest pl-2">
+                     Result
+                   </div>
+                 </div>
+                 <div className="flex-1 overflow-auto bg-[#0a0a0a]">
+                    {activeTab === 'visualize' && <DockerVisualizer data={parsedObj} />}
+                    {activeTab === 'convert' && (
+                      <textarea readOnly value={parsedObj ? JSON.stringify(parsedObj, null, 2) : ""} className={`w-full h-full bg-transparent p-4 resize-none focus:outline-none ${codeFont.className} text-sm text-emerald-300`} />
+                    )}
+                    {activeTab === 'validate' && (
+                      <div className="h-full flex flex-col items-center justify-center gap-4">
+                        <div className={`w-24 h-24 rounded-full flex items-center justify-center ${error ? 'bg-red-500/10' : 'bg-emerald-500/10'}`}>
+                           {error ? <X className="w-10 h-10 text-red-500" /> : <CheckCircle className="w-10 h-10 text-emerald-500" />}
+                        </div>
+                        <h2 className="text-2xl font-bold text-white">{error ? "Syntax Error" : "All Good"}</h2>
+                      </div>
+                    )}
+                 </div>
+              </div>
+           </div>
+        )}
 
-               <div className="inline-block bg-emerald-500/10 border border-emerald-500/20 px-6 py-2 rounded-full">
-                  <p className="text-emerald-400 font-bold text-sm md:text-base flex items-center gap-2">
-                     <Terminal className="w-4 h-4" /> "{humanDesc}"
-                  </p>
-               </div>
-            </div>
-         </motion.div>
+        {/* MODE: COMPARE (Diff) */}
+        {activeTab === 'compare' && (
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 h-full">
+              {/* Input A */}
+              <SimpleEditor code={yamlLeft} setCode={setYamlLeft} label="Original (A)" color="slate" />
+              
+              {/* Input B */}
+              <SimpleEditor code={yamlRight} setCode={setYamlRight} label="Modified (B)" color="blue" />
+              
+              {/* Diff Result */}
+              <div className="flex flex-col h-full bg-neutral-900 rounded-xl border border-white/10 overflow-hidden shadow-lg">
+                 <div className="bg-[#0f0f0f] border-b border-white/5 p-2 text-xs font-bold text-emerald-400 uppercase tracking-widest pl-2">
+                   Differences
+                 </div>
+                 <DiffViewer oldText={yamlLeft} newText={yamlRight} />
+              </div>
+           </div>
+        )}
 
-         {/* --- PRESETS ROW --- */}
-         <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {presets.map((preset, i) => (
-               <button 
-                 key={i}
-                 onClick={() => setCron(preset.value)}
-                 className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-bold hover:bg-indigo-600 hover:border-indigo-500 hover:text-white transition-all"
-               >
-                  {preset.label}
-               </button>
-            ))}
-         </div>
-
-         {/* --- BUILDER CONTROLS --- */}
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            
-            <CronField 
-               label="Minute" 
-               value={cron.minute} 
-               range={[0, 59]}
-               onChange={(v: string) => setCron({...cron, minute: v})} 
-            />
-            <CronField 
-               label="Hour" 
-               value={cron.hour} 
-               range={[0, 23]}
-               onChange={(v: string) => setCron({...cron, hour: v})} 
-            />
-            <CronField 
-               label="Day (Month)" 
-               value={cron.dom} 
-               range={[1, 31]}
-               onChange={(v: string) => setCron({...cron, dom: v})} 
-            />
-            <CronField 
-               label="Month" 
-               value={cron.month} 
-               range={[1, 12]}
-               onChange={(v: string) => setCron({...cron, month: v})} 
-            />
-            <CronField 
-               label="Day (Week)" 
-               value={cron.dow} 
-               range={[0, 6]}
-               onChange={(v: string) => setCron({...cron, dow: v})} 
-            />
-
-         </div>
-
-      </div>
-
-      {/* --- INFO SECTION --- */}
-      <section className="max-w-4xl mx-auto px-6 pb-20 relative z-10 text-center">
-         <div className="bg-neutral-900 border border-white/10 rounded-2xl p-8">
-            <h3 className={`text-2xl font-bold text-white mb-4 ${titleFont.className}`}>What is Cron?</h3>
-            <p className="text-neutral-400 leading-relaxed">
-               The software utility <strong>Cron</strong> is a time-based job scheduler in Unix-like computer operating systems. Users that set up and maintain software environments use cron to schedule jobs (commands or shell scripts) to run periodically at fixed times, dates, or intervals.
-            </p>
-            <div className="flex justify-center gap-8 mt-8 text-sm font-mono text-indigo-300">
-               <div>
-                  <span className="block text-white font-bold text-lg">*</span>
-                  any value
-               </div>
-               <div>
-                  <span className="block text-white font-bold text-lg">,</span>
-                  value list separator
-               </div>
-               <div>
-                  <span className="block text-white font-bold text-lg">-</span>
-                  range of values
-               </div>
-               <div>
-                  <span className="block text-white font-bold text-lg">/</span>
-                  step values
-               </div>
-            </div>
-         </div>
-      </section>
-
+      </main>
     </div>
   );
 }

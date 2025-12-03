@@ -65,6 +65,17 @@ const tools = [
     status: "Live"
   },
   {
+    id: "Yml Generator and differnce checker",
+    title: "Yml Generator and differnce checker",
+    desc: "Beautify complex Yml files creat and  diagrams instantly.",
+    icon: Crown,
+    color: "text-blue-400",
+    bg: "bg-blue-500/10",
+    border: "group-hover:border-blue-500/50",
+    link: "/tooling/writeymlfiles",
+    status: "Live"
+  },
+  {
     id: "pwd-generator",
     title: "Password Gen",
     desc: "Generate cryptographically secure passwords with custom entropy settings.",
