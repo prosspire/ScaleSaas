@@ -15,6 +15,9 @@ import {
   Terminal,
   Laptop
 } from "lucide-react";
+import { FullNavbar } from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer";
+
 import { Titan_One, Nunito } from 'next/font/google';
 
 // --- PLACEHOLDER IMAGE FOR FOUNDER ---
@@ -35,7 +38,9 @@ const bodyFont = Nunito({
 
 const AboutPage = () => {
   return (
-    <div className={`w-full min-h-screen bg-neutral-950 text-white ${bodyFont.className}`}>
+ <div>
+   <FullNavbar/>
+      <div className={`w-full min-h-screen bg-neutral-950 text-white ${bodyFont.className}`}>
       
       {/* Background Grid */}
       <div className="fixed inset-0 pointer-events-none">
@@ -236,6 +241,8 @@ const AboutPage = () => {
       </section>
 
     </div>
+    <Footer/>
+ </div>
   );
 };
 

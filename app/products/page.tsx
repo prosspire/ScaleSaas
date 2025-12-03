@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { Titan_One, Nunito } from 'next/font/google';
 import Image from "next/image";
+import { FullNavbar } from "@/components/Navbar/Navbar"
+import Footer from "@/components/Footer";
 
 // --- FONTS ---
 const titleFont = Titan_One({ 
@@ -78,7 +80,9 @@ const projects = [
 
 const ProductsPage = () => {
   return (
-    <div className={`w-full min-h-screen bg-neutral-950 bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:32px_32px] ${bodyFont.className}`}>
+ <div>
+   <FullNavbar/>
+      <div className={`w-full min-h-screen bg-neutral-950 bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:32px_32px] ${bodyFont.className}`}>
       
       {/* =========================================
           HERO SECTION
@@ -212,6 +216,8 @@ const ProductsPage = () => {
       </section>
 
     </div>
+    <Footer/>
+ </div>
   );
 };
 

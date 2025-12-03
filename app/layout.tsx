@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { FullNavbar } from "@/components/Navbar/Navbar"
-import Footer from "@/components/Footer";
+
 
 
 
@@ -23,11 +22,9 @@ export default function RootLayout({
       <body
       className="bg-neutral-950"
       >
-        <FullNavbar/>
         {children}
           <Analytics/>
               <SpeedInsights/>
-         <Footer/>
          <Toaster />
       </body>
     </html>

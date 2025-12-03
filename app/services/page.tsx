@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+
 import { 
   Check, 
   X, 
@@ -17,6 +18,8 @@ import {
   Workflow
 } from "lucide-react";
 import { Titan_One, Nunito } from 'next/font/google';
+import { FullNavbar } from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer";
 
 // --- FONTS ---
 const titleFont = Titan_One({ 
@@ -139,7 +142,9 @@ const specializedServices = [
 
 const PricingPage = () => {
   return (
-    <div className={`w-full md:mt-6 min-h-screen bg-neutral-950 bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:32px_32px] ${bodyFont.className}`}>
+  <div>
+    <FullNavbar/>
+      <div className={`w-full md:mt-6 min-h-screen bg-neutral-950 bg-[linear-gradient(to_right,rgba(99,102,241,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:32px_32px] ${bodyFont.className}`}>
       
       {/* =========================================
           HEADER SECTION
@@ -354,6 +359,8 @@ const PricingPage = () => {
       </section>
 
     </div>
+    <Footer/>
+  </div>
   );
 };
 

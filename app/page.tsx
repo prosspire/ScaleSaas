@@ -13,6 +13,8 @@ import { toast } from "sonner"
 import RecentWork from "@/components/ui/Websites/recenwork";
 import ServicesPage from "@/components/service";
 import WrapUpSection from "@/components/Wrapupsection";
+import { FullNavbar } from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer";
 export default function Page() {
 
   const router = useRouter();
@@ -74,6 +76,7 @@ export default function Page() {
 
   return (
     <div className="bg-neutral-950" >
+		<FullNavbar/>
 
       <div  className="">
       <Hero onHandleSubmit={onHandleSubmit} defaultEmail={defaultEmail} />
@@ -96,6 +99,7 @@ export default function Page() {
 
 <div className="">
 </div> 
+<Footer/>
     </div>
   )
 }
