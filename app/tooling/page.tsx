@@ -75,6 +75,17 @@ const tools = [
     link: "/tooling/writeymlfiles",
     status: "Live"
   },
+   {
+    id: "base64decode",
+    title: "Decode Encode base64 ",
+    desc: "Advanced base 64 Encoder and decoder",
+    icon: FileJson,
+    color: "text-emerald-400",
+    bg: "bg-emerald-500/10",
+    border: "group-hover:border-emerald-500/50",
+    link: "/tooling/base64decode",
+    status: "Live"
+  },
   {
     id: "pwd-generator",
     title: "Password Gen",
