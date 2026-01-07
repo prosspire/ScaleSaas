@@ -11,9 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Titan_One, Nunito } from 'next/font/google';
 import { EmailFormschemaType } from "@/lib/schema";
 import { IEmaildetail } from "@/lib/types";
+import { Loader2 } from "lucide-react"; 
 
-// --- TYPES (Mocking these based on your snippet) ---
-// You can import these from your actual @/lib files
 // --- FONTS ---
 const titleFont = Titan_One({ 
   weight: '400', 
@@ -30,9 +29,11 @@ const bodyFont = Nunito({
 export default function Hero({
   onHandleSubmit,
   defaultEmail,
+  isLoading, // 1. Accept the isLoading prop here
 }: {
   defaultEmail?: IEmaildetail;
   onHandleSubmit: (data: EmailFormschemaType) => void;
+  isLoading: boolean; // 2. Define the type
 }) {
   
   const form = useForm<EmailFormschemaType>({
@@ -126,6 +127,7 @@ export default function Hero({
                       <FormItem className="flex-1 mb-0">
                         <FormControl>
                           <Input
+                            disabled={isLoading} // Disable input while loading
                             placeholder="Enter your email address"
                             {...field}
                             className="flex-1 min-w-0 bg-transparent border-none text-white placeholder-neutral-500 px-6 py-4 text-base md:text-lg focus-visible:ring-0 focus-visible:ring-offset-0 font-medium"
@@ -140,10 +142,21 @@ export default function Hero({
                     <HoverBorderGradient
                       containerClassName="rounded-full"
                       as="button"
-                      className="flex justify-center items-center px-6 py-3 bg-neutral-950 text-white"
+                      // 3. Conditional Disabled Logic
+                      // Note: We pass standard button props here, assuming HoverBorderGradient passes them down.
+                      // If it doesn't, the visual cues inside will still work.
+                      {...({ disabled: isLoading } as any)}
+                      className={`flex justify-center items-center px-6 py-3 bg-neutral-950 text-white transition-opacity ${isLoading ? "opacity-70 cursor-not-allowed" : ""}`}
                     >
-                      <span className={`text-sm md:text-base font-bold ${bodyFont.className}`}>
-                        Get Consultation
+                      <span className={`text-sm md:text-base font-bold ${bodyFont.className} flex items-center gap-2`}>
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>Sending...</span>
+                          </>
+                        ) : (
+                          "Get Consultation"
+                        )}
                       </span>
                     </HoverBorderGradient>
                   </div>
