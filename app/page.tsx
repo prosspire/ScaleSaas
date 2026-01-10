@@ -11,6 +11,8 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import RecentWork from "@/components/ui/Websites/recenwork";
 import ServicesPage from "@/components/service";
+import Showcasework from "@/components/websitework";
+
 import WrapUpSection from "@/components/Wrapupsection";
 import { FullNavbar } from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer";
@@ -96,6 +98,7 @@ export default function Page() {
       </div>
 
       <RecentWork />
+      <Showcasework/>
 
       <div className="px-2 mt-[30px]">
         <MethodologySection />

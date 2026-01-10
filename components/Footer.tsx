@@ -64,14 +64,20 @@ export default function Footer() {
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-white">Company</h3>
               <ul className="space-y-4">
-                {['About Us', 'Our Team', 'Careers', 'Blog', 'Privacy Policy'].map((item) => (
+                {['About Us', 'Our Team', 'Careers', 'Blog',].map((item) => (
                   <li key={item}>
                     <Link href="#" className="text-neutral-400 hover:text-emerald-400 text-sm flex items-center gap-2 group transition-colors">
                       <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                       {item}
                     </Link>
+                    
+
                   </li>
                 ))}
+                 <Link href="/privacy" className="text-neutral-400 py-2 hover:text-emerald-400 text-sm flex items-center gap-2 group transition-colors">
+                      <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
+                      Privacy policy
+                    </Link>
               </ul>
             </div>
 
