@@ -88,7 +88,7 @@ export default function Page() {
     <div className="bg-neutral-950">
       <FullNavbar />
 
-      <div className="">
+      <div className="mt-8 md:mt-0">
         {/* 4. Pass the isLoading prop to Hero */}
         <Hero 
           onHandleSubmit={onHandleSubmit} 
