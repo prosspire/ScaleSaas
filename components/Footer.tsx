@@ -16,7 +16,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="relative w-full">
-      <BackgroundBeamsWithCollision className="w-full flex-col justify-end items-center min-h-[350px] bg-neutral-950">
+      <BackgroundBeamsWithCollision className="w-full flex-col justify-end items-center min-h-[390px] bg-neutral-950">
         
         {/* Main Content Container */}
         <div className="w-full max-w-7xl mx-auto px-6 py-4   relative z-20">
