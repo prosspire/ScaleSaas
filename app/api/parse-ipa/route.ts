@@ -21,12 +21,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "File must be an IPA" }, { status: 400 });
     }
 
-    // Convert File to Buffer
+    // Convert File to Buffer using modern method
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    // Write to temporary file (app-info-parser needs a file path in Node.js)
-    const tempFileName = `${Date.now()}-${file.name}`;
+    // Write to temporary file
+    const tempFileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.ipa`;
     tempFilePath = join(tmpdir(), tempFileName);
     await writeFile(tempFilePath, buffer);
 
