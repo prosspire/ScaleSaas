@@ -6,11 +6,18 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+// 1. Update the type definition for params to be a Promise
+export async function GET(
+  request: Request, 
+  { params }: { params: Promise<{ id: string }> } 
+) {
+  // 2. Await the params object
+  const { id } = await params;
+
   const { data: app, error } = await supabase
     .from('apps')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single();
 
   if (error || !app) {
