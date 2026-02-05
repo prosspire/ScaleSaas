@@ -107,6 +107,17 @@ const tools = [
     border: "group-hover:border-amber-500/50",
     link: "#",
     status: "Coming Soon"
+  },
+   {
+    id: "app on air ",
+    title: "App On Air",
+    desc: "apps on air is a tool that allows to distribute apps wirelessly.",
+    icon: FileCode,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "group-hover:border-amber-500/50",
+    link: "/tooling/appsonair",
+    status: "Live"
   }
 ];
 
