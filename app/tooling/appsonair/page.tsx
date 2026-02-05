@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { 
   Upload, Cloud, Share2, QrCode, Copy, Check, Trash2, 
-  Globe, ShieldCheck, Zap, Info, Link as LinkIcon 
+  Globe, ShieldCheck, Zap, Info, Link as LinkIcon, ExternalLink 
 } from "lucide-react";
 import { Titan_One, Nunito } from 'next/font/google';
 import { createClient } from '@supabase/supabase-js';
@@ -55,9 +55,9 @@ export default function AppsOnAirPage() {
         { 
           name: file.name, 
           url: publicUrl, 
-          bundle_id: "com.user.app", // In production, parse this or let user input it
+          bundle_id: "com.user.app", 
           version: "1.0.0",
-          file_path: fileName // Store reference for deletion
+          file_path: fileName 
         }
       ]);
 
@@ -72,13 +72,9 @@ export default function AppsOnAirPage() {
 
   const handleDelete = async (app: any) => {
     if (!confirm("Are you sure you want to delete this build?")) return;
-
     try {
-      // 1. Remove from Storage
       await supabase.storage.from('app-releases').remove([app.file_path]);
-      // 2. Remove from DB
       await supabase.from('apps').delete().eq('id', app.id);
-      
       setSelectedApp(null);
       fetchApps();
     } catch (error) {
@@ -86,15 +82,16 @@ export default function AppsOnAirPage() {
     }
   };
 
-  const getInstallUrl = (app: any) => {
+  // --- UPDATED URL LOGIC ---
+  const getShareUrl = (app: any) => {
     if (typeof window === "undefined") return "";
-    const manifestApiUrl = `${window.location.origin}/api/manifest/${app.id}`;
-    return `itms-services://?action=download-manifest&url=${encodeURIComponent(manifestApiUrl)}`;
+    // Points to your new landing page route
+    return `${window.location.origin}/tooling/appsonair/${app.id}`;
   };
 
   const copyToClipboard = (app: any) => {
-    const itmsUrl = getInstallUrl(app);
-    navigator.clipboard.writeText(itmsUrl);
+    const shareUrl = getShareUrl(app);
+    navigator.clipboard.writeText(shareUrl);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -128,7 +125,7 @@ export default function AppsOnAirPage() {
           </label>
         </div>
 
-        {/* --- APP LIST & SHARING --- */}
+        {/* --- APP LIST --- */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-4">
             <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
@@ -157,32 +154,43 @@ export default function AppsOnAirPage() {
           <div className="bg-neutral-900 border border-white/10 rounded-3xl p-8 sticky top-8 h-fit shadow-2xl">
             {selectedApp ? (
               <div className="text-center animate-in fade-in zoom-in duration-300">
+                {/* QR Code now leads to landing page */}
                 <div className="bg-white p-4 rounded-2xl inline-block mb-6 shadow-2xl">
-                  <QRCodeSVG value={getInstallUrl(selectedApp)} size={180} />
+                  <QRCodeSVG value={getShareUrl(selectedApp)} size={180} />
                 </div>
                 <h3 className="font-bold text-lg mb-2 truncate">{selectedApp.name}</h3>
-                <p className="text-sm text-slate-400 mb-6">Scan with iOS Camera to Install</p>
+                <p className="text-sm text-slate-400 mb-6">Scan to open download page</p>
                 
                 <div className="space-y-3">
                   <button 
                     onClick={() => copyToClipboard(selectedApp)}
                     className="w-full flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 py-3 rounded-xl font-bold transition-all"
                   >
-                    {copied ? <Check className="w-4 h-4" /> : <LinkIcon className="w-4 h-4" />}
-                    {copied ? "Link Copied!" : "Copy Install Link"}
+                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    {copied ? "Link Copied!" : "Copy Share Link"}
                   </button>
+                  
+                  {/* New: Quick link to view page */}
+                  <a 
+                    href={getShareUrl(selectedApp)}
+                    target="_blank"
+                    className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 py-3 rounded-xl font-bold transition-all text-sm"
+                  >
+                    <ExternalLink className="w-4 h-4" /> View Landing Page
+                  </a>
+
                   <button 
                     onClick={() => handleDelete(selectedApp)}
-                    className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-rose-600/20 text-rose-400 py-3 rounded-xl font-bold transition-all"
+                    className="w-full flex items-center justify-center gap-2 bg-transparent hover:text-rose-400 text-slate-500 py-3 rounded-xl text-xs transition-all"
                   >
-                    <Trash2 className="w-4 h-4" /> Delete This Release
+                    <Trash2 className="w-3 h-3" /> Delete Build
                   </button>
                 </div>
               </div>
             ) : (
               <div className="text-center py-20 opacity-20">
                 <QrCode className="w-16 h-16 mx-auto mb-4" />
-                <p className="text-sm">Select a build to generate QR</p>
+                <p className="text-sm">Select a build to share</p>
               </div>
             )}
           </div>
