@@ -38,6 +38,19 @@ export default function AppsOnAirPage() {
 
     setUploading(true);
     try {
+      // 1. GET METADATA AUTOMATICALLY
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const parseRes = await fetch('/api/parse-ipa', { 
+        method: 'POST', 
+        body: formData 
+      });
+      const metadata = await parseRes.json();
+
+      if (metadata.error) throw new Error("Could not read IPA metadata");
+
+      // 2. UPLOAD TO STORAGE
       const fileExt = file.name.split('.').pop();
       const fileName = `${Math.random()}-${Date.now()}.${fileExt}`;
       
@@ -51,12 +64,13 @@ export default function AppsOnAirPage() {
         .from('app-releases')
         .getPublicUrl(fileName);
 
+      // 3. INSERT INTO DB WITH AUTO-EXTRACTED DATA
       const { error: dbError } = await supabase.from('apps').insert([
         { 
-          name: file.name, 
+          name: metadata.name || file.name, 
           url: publicUrl, 
-          bundle_id: "com.user.app", 
-          version: "1.0.0",
+          bundle_id: metadata.bundle_id, // REAL ID
+          version: metadata.version,      // REAL VERSION
           file_path: fileName 
         }
       ]);
@@ -69,7 +83,6 @@ export default function AppsOnAirPage() {
       setUploading(false);
     }
   };
-
   const handleDelete = async (app: any) => {
     if (!confirm("Are you sure you want to delete this build?")) return;
     try {
