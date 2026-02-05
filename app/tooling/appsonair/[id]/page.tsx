@@ -24,7 +24,7 @@ export default async function AppSharePage({ params }: PageProps) {
   }
 
   // This links to your XML manifest route
-  const manifestUrl = `https://yourdomain.com/api/manifest/${id}`;
+  const manifestUrl = `https://saasscale.in/api/manifest/${id}`;
   const installLink = `itms-services://?action=download-manifest&url=${encodeURIComponent(manifestUrl)}`;
 
   return (
