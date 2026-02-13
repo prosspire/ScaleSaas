@@ -118,6 +118,17 @@ const tools = [
     border: "group-hover:border-amber-500/50",
     link: "/tooling/appsonair",
     status: "Live"
+  },
+  {
+    id: "web view mobile",
+    title: "Web View Mobile",
+    desc: "View web content in a mobile-friendly format.",
+    icon: FileCode,
+    color: "text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "group-hover:border-amber-500/50",
+    link: "/tooling/webviewmobile",
+    status: "Live"
   }
 ];
 
