@@ -65,7 +65,7 @@ const Page: React.FC = () => {
     }).toString();
 
     // Redirecting to the SAME page but with parameters
-    router.push(`/sucess?${queryParams}`);
+    router.push(`/success?${queryParams}`);
   };
 
   return (
