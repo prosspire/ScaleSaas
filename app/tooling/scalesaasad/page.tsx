@@ -401,7 +401,7 @@ export default function AdCreativeCreator() {
                   { key: 'cta',      label: 'CTA Button' },
                   { key: 'phone',    label: 'Phone' },
                   { key: 'website',  label: 'Website' },
-                ] as const).map(({ key, label, big }) => (
+                ] as { key: keyof typeof content; label: string; big?: boolean }[]).map(({ key, label, big }) => (
                   <div key={key}>
                     <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#555', marginBottom: 6 }}>{label}</div>
                     {big ? (

@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import founder from "@/public/founder.jpg"
+import founder from "../../public/founder.jpg"
 import { 
   Code2, 
   Cpu, 
@@ -15,8 +15,8 @@ import {
   Terminal,
   Laptop
 } from "lucide-react";
-import { FullNavbar } from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer";
+import { FullNavbar } from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer";
 
 import { Titan_One, Nunito } from 'next/font/google';
 
