@@ -156,58 +156,60 @@ const WorkShowcaseWithImages = () => {
                      className={`${project.colSpan} group relative min-h-[500px] cursor-pointer`}
                   >
                      <Link href={project.link} target="_blank" className="block h-full w-full">
-                        <div className="h-full w-full relative overflow-hidden rounded-3xl border border-white/10 transition-all duration-500 hover:border-indigo-500/50 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)] hover:-translate-y-2 group">
+                     <div className="h-full w-full flex flex-col relative overflow-hidden rounded-3xl border border-white/10 transition-all duration-500 hover:border-indigo-500/50 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)] hover:-translate-y-2 group bg-neutral-900/40 backdrop-blur-sm">
+                        
+                        {/* Inner glowing ring on hover */}
+                        <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-white/20 transition-all z-20 pointer-events-none"></div>
 
-                           {/* Inner glowing ring on hover */}
-                           <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5 group-hover:ring-white/20 transition-all z-20 pointer-events-none"></div>
-
-                           {/* --- BACKGROUND IMAGE & OVERLAYS --- */}
-                           <div className="absolute inset-0 h-full w-full z-0">
-                              {/* 1. The Image */}
+                        {/* --- IMAGE CONTAINER --- */}
+                        <div className="relative h-72 w-full p-6 flex items-center justify-center border-b border-white/5 overflow-hidden">
+                           {/* Background Gradient for the image container */}
+                           <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`}></div>
+                           
+                           {/* The actual image, constrained to fit perfectly without cropping */}
+                           <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10 group-hover:border-white/20 transition-colors bg-neutral-950/80">
                               <Image
                                  src={project.imageSrc}
                                  alt={project.alt}
                                  fill
-                                 className="object-cover transition-transform duration-700 will-change-transform group-hover:scale-110"
+                                 className="object-contain transition-transform duration-700 will-change-transform group-hover:scale-105 p-2"
                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                               />
-                              {/* 2. Dark Gradient Overlay for Text Readability */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-transparent transition-opacity duration-500 group-hover:via-neutral-950/90"></div>
-                           </div>
-
-
-                           {/* --- CONTENT --- */}
-                           <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
-
-                              {/* Hover Action Button */}
-                              <div className="absolute top-8 right-8 w-14 h-14 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.1)] group-hover:bg-white group-hover:text-black text-white">
-                                 <ArrowUpRight className="w-6 h-6 transition-transform group-hover:rotate-45" />
-                              </div>
-
-                              {/* Tags */}
-                              <div className="flex flex-wrap gap-2 mb-6">
-                                 {project.tags.map((tag, i) => (
-                                    <span key={i} className="px-3 py-1.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold text-neutral-300 uppercase tracking-widest group-hover:bg-indigo-500/20 group-hover:border-indigo-400/50 group-hover:text-white transition-all duration-300">
-                                       {tag}
-                                    </span>
-                                 ))}
-                              </div>
-
-                              <h3 className={`text-3xl md:text-4xl font-bold text-white mb-3 drop-shadow-lg transition-transform duration-300 group-hover:-translate-y-1 ${titleFont.className}`}>
-                                 {project.title}
-                              </h3>
-
-                              <p className="text-neutral-400 font-medium line-clamp-2 mb-6 drop-shadow-md transition-all duration-300 group-hover:-translate-y-1 group-hover:text-neutral-300">
-                                 {project.description}
-                              </p>
-
-                              <div className="flex items-center text-xs font-bold text-emerald-400/70 group-hover:text-emerald-400 transition-colors">
-                                 <span className="uppercase tracking-widest">{project.category}</span>
-                                 <div className="h-px flex-1 bg-white/10 ml-4 group-hover:bg-white/30 transition-colors"></div>
-                              </div>
-
                            </div>
                         </div>
+
+                        {/* --- CONTENT --- */}
+                        <div className="flex flex-col flex-1 p-8 relative z-10">
+                           
+                           {/* Hover Action Button */}
+                           <div className="absolute top-8 right-8 w-12 h-12 bg-white/5 rounded-full flex items-center justify-center backdrop-blur-md opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:bg-white group-hover:text-black text-white">
+                              <ArrowUpRight className="w-5 h-5 transition-transform group-hover:rotate-45" />
+                           </div>
+
+                           {/* Tags */}
+                           <div className="flex flex-wrap gap-2 mb-6">
+                              {project.tags.map((tag, i) => (
+                                 <span key={i} className="px-3 py-1.5 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-bold text-neutral-300 uppercase tracking-widest group-hover:bg-indigo-500/20 group-hover:border-indigo-400/50 group-hover:text-white transition-all duration-300">
+                                    {tag}
+                                 </span>
+                              ))}
+                           </div>
+
+                           <h3 className={`text-2xl md:text-3xl font-bold text-white mb-3 transition-transform duration-300 group-hover:-translate-y-1 ${titleFont.className}`}>
+                              {project.title}
+                           </h3>
+                           
+                           <p className="text-neutral-400 font-medium line-clamp-2 mb-8 transition-all duration-300 group-hover:-translate-y-1 group-hover:text-neutral-300">
+                              {project.description}
+                           </p>
+
+                           {/* Category Footer */}
+                           <div className="mt-auto flex items-center text-xs font-bold text-emerald-400/70 group-hover:text-emerald-400 transition-colors">
+                              <span className="uppercase tracking-widest">{project.category}</span>
+                              <div className="h-px flex-1 bg-white/10 ml-4 group-hover:bg-white/30 transition-colors"></div>
+                           </div>
+                        </div>
+                     </div>
                      </Link>
                   </motion.div>
                ))}
