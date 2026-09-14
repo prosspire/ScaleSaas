@@ -7,6 +7,7 @@ import Script from "next/script"; // 1. Import the Script component
 import "../global.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://scalesaas.com"),
   title: "Scale Saas | Premium Web & Software Development Agency",
   description: "Scale Saas is a top-tier software and website development agency specializing in custom SaaS solutions, AI integration, and high-performance digital products.",
   keywords: [
