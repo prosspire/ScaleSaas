@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Replace with your actual production domain
-  const baseUrl = "https://scalesaas.com"; 
+  const baseUrl = "https://saasscale.in";
 
   const routes = [
     '',
