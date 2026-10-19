@@ -9,8 +9,8 @@ import { Titan_One, Nunito } from 'next/font/google';
 import { createClient } from '@supabase/supabase-js';
 import { QRCodeSVG } from 'qrcode.react';
 
-const titleFont = Titan_One({ weight: '400', subsets: ['latin'] });
-const bodyFont = Nunito({ subsets: ['latin'], weight: ['400', '600', '700'] });
+const titleFont = Titan_One({ weight: '400', subsets: ['latin'], display: 'swap' });
+const bodyFont = Nunito({ subsets: ['latin'], weight: ['400', '600', '700', '800'], display: 'swap' });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

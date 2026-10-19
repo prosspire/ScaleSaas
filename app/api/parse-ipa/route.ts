@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
+
+export const dynamic = 'force-dynamic';
 // @ts-ignore
 import AppInfoParser from 'app-info-parser';
-import { writeFile, unlink } from 'fs/promises';
+import { writeFile, unlink, mkdir } from 'fs/promises';
 import { join } from 'path';
-import { tmpdir } from 'os';
 
 export async function POST(request: Request) {
   let tempFilePath: string | null = null;
@@ -25,9 +26,11 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    // Write to temporary file
+    // Write to isolated temporary file in project cache instead of os.tmpdir
+    const tempDir = join(process.cwd(), '.next', 'cache', 'tmp');
+    await mkdir(tempDir, { recursive: true });
     const tempFileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.ipa`;
-    tempFilePath = join(tmpdir(), tempFileName);
+    tempFilePath = join(tempDir, tempFileName);
     await writeFile(tempFilePath, buffer);
 
     // Parse the IPA file
