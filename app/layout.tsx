@@ -71,7 +71,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="bg-neutral-950">
+      <body className="bg-neutral-950" suppressHydrationWarning>
         {children}
         <Analytics />
         <SpeedInsights />

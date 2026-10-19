@@ -42,13 +42,16 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const EmailFormschema = z
   .object({
+    name: z.string().optional(),
     email: z.string().min(2, {
 		message: "Not a valid email",
 	}) // Ensures the field is not empty
       .refine((email) => emailRegex.test(email), {
         message: "Please enter a valid email address.", // Provides validation feedback
       }),
-    created_at: z.string(), // Add additional validation if needed
+    phone: z.string().optional(),
+    service: z.string().optional(),
+    created_at: z.string().optional(), // Add additional validation if needed
   });
 
 export type EmailFormschemaType = z.infer<typeof EmailFormschema>;

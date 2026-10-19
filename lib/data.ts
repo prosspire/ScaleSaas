@@ -96,8 +96,9 @@ export const defaultEmail: IEmaildetail = {
 	id: " ",
 	created_at: "",
 	email: "",
-	
-
+	name: "",
+	phone: "",
+	service: "",
 };
 export const defaultlesson: IchapterDetails = {
 	catagory_id: 1,

@@ -11,18 +11,32 @@ const DASHBOARD = "/dashboard/blog";
 
 export async function createEmail(data: {
 	email: string;
-	created_at: string;
-
+	created_at?: string;
+	name?: string;
+	phone?: string;
+	service?: string;
 }) {
-
-
 	// returning data 
-
 	const supabase = await createSupabaseServerClient();
-	const emailresult = await supabase
+	const payload = {
+		...data,
+		created_at: data.created_at || new Date().toISOString(),
+	};
+	let emailresult = await supabase
 		.from("emaildata")
-		.insert(data)
+		.insert(payload as any)
 		.single();
+
+	if (emailresult.error && (emailresult.error.message?.includes("column") || emailresult.error.code === "PGRST204" || emailresult.error.code === "42703")) {
+		console.warn("Retrying email insert with basic fields due to schema:", emailresult.error.message);
+		emailresult = await supabase
+			.from("emaildata")
+			.insert({
+				email: data.email,
+				created_at: payload.created_at,
+			})
+			.single();
+	}
 
 	console.log("Email result:", emailresult);
 

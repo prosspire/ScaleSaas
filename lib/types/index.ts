@@ -34,6 +34,9 @@ export type IEmaildetail = {
 	created_at: string;
 	id: string;
 	email: string;
+	name?: string;
+	phone?: string;
+	service?: string;
 };
 export type IchapterDetails = {
 	catagory_id: number

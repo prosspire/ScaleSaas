@@ -19,7 +19,7 @@ import Footer from "../components/Footer";
 
 export default function Page() {
   const router = useRouter();
-  
+
   // 2. Add loading state
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,12 +37,12 @@ export default function Page() {
         action: {
           label: "Try Again",
           onClick: () => {
-            router.push("/"); 
+            router.push("/");
           },
         },
       });
       setIsLoading(false); // Stop loading if validation fails
-      return; 
+      return;
     }
 
     try {
@@ -88,17 +88,17 @@ export default function Page() {
     <div className="bg-neutral-950">
       <FullNavbar />
 
-      <div className="mt-8 md:mt-0">
+      <div className="mt-[30px] md:mt-16">
         {/* 4. Pass the isLoading prop to Hero */}
-        <Hero 
-          onHandleSubmit={onHandleSubmit} 
-          defaultEmail={defaultEmail} 
-          isLoading={isLoading} 
+        <Hero
+          onHandleSubmit={onHandleSubmit}
+          defaultEmail={defaultEmail}
+          isLoading={isLoading}
         />
       </div>
 
       <RecentWork />
-      <Showcasework/>
+      <Showcasework />
 
       <div className="px-2 mt-[30px]">
         <MethodologySection />
