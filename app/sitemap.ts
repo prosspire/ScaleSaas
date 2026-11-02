@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services',
     '/contact',
     '/tooling',
-    '/tooling/appsonair',
     '/tooling/base64decode',
     '/tooling/generatecronjob',
     '/tooling/jsoneditor',

@@ -116,7 +116,7 @@ const tools = [
     color: "text-amber-400",
     bg: "bg-amber-500/10",
     border: "group-hover:border-amber-500/50",
-    link: "/tooling/appsonair",
+    link: "https://droponair.saasscale.in/",
     status: "Live"
   },
   {

@@ -29,10 +29,6 @@ function Navbar({ className }: { className?: string }) {
         <Link className="text-white" href="/aboutus">
           About
         </Link>
-        <Link href="/tooling" className="text-white">
-          Tools
-
-        </Link>
         <Link href="/our-work" className="text-white">
           Our Work
         </Link>

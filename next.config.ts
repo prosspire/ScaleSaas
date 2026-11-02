@@ -15,13 +15,26 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'i.pravatar.cc',
       },
-        {
+      {
         protocol: 'https',
         hostname: 'miajmerfkgayimdhfnpy.supabase.co',
       },
     ],
   },
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/tooling/appsonair',
+        destination: 'https://droponair.saasscale.in',
+        permanent: true,
+      },
+      {
+        source: '/tooling/appsonair/:path*',
+        destination: 'https://droponair.saasscale.in/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
