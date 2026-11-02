@@ -70,6 +70,11 @@ export default function RootLayout({
             gtag('config', 'AW-18521680933');
           `}
         </Script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7557474007097933"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body className="bg-neutral-950" suppressHydrationWarning>
         {children}
